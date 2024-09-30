@@ -109,9 +109,12 @@ public class MyArray {
             }
             int countLeft = (k%2 > 0 ? k/2 +1 : k/2), countRight = k - countLeft;
             if (index == array.length) {
-                countLeft = k;            }
+                countLeft = k;
+                countRight = 0;
+            }
             if (index == 0) {
                 countRight = k;
+                countLeft = 0;
             }
             if (k/2 > index && index < size/2) {
                 countLeft = index;
