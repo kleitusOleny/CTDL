@@ -1,5 +1,6 @@
 package Lab1_Task2;
 
+import javax.swing.*;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,16 @@ public class Faculty {
         return result;
     }
 
+    public List<Course> getCoursesByLecturer(String lecturerName) {
+        List<Course> result = new ArrayList<>();
+        for (int i = 0; i < courses.length; i++) {
+            if (courses[i].getLecturer().equals(lecturerName)){
+                System.out.println();
+                result.add(courses[i]);
+            }
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         Student student1 = new Student("23130383", "Nguyen Phu Vinh", 2023);
@@ -75,9 +86,10 @@ public class Faculty {
         Course course2 = new Course("002", "B", "Math", listStudent2, "D");
         Course[] listCourse = new Course[]{course1, course2};
         Faculty faculty = new Faculty("IT", listCourse, "RD");
-//        System.out.println(faculty.checkStudentInCourse(student3));
-//        System.out.println(faculty.numberStudentInCourse(course1, 2023));
-//        System.out.println(faculty.numberStudentsInFaculty(2023));
+        System.out.println(faculty.checkStudentInCourse(student3));
+        System.out.println(faculty.numberStudentInCourse(course1, 2023));
+        System.out.println(faculty.numberStudentsInFaculty(2023));
         System.out.println(faculty.getHighestCourses().toString());
+        System.out.println(faculty.getCoursesByLecturer("D").toString());
     }
 }

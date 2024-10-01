@@ -6,12 +6,21 @@ public class Course {
     private String type;
     private Student[] students;
     private String lecturer;
-    public Course(String id,String title,String type,Student[] students ,String lecturer) {
+
+    public Course(String id, String title, String type, Student[] students, String lecturer) {
         this.id = id;
         this.title = title;
         this.type = type;
         this.students = students;
         this.lecturer = lecturer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getLecturer() {
+        return lecturer;
     }
 
     public boolean containsName(Student student) {
@@ -23,14 +32,10 @@ public class Course {
         return false;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public Student[] countStudentByYear(int year) {
-        Student[]listStudents = new Student[students.length];
+        Student[] listStudents = new Student[students.length];
         for (int i = 0; i < students.length; i++) {
-            if (students[i].getYear() == year){
+            if (students[i].getYear() == year) {
                 listStudents[i] = students[i];
             }
         }
@@ -40,7 +45,7 @@ public class Course {
     public int countStudent() {
         int result = 0;
         for (int i = 0; i < students.length; i++) {
-               result ++;
+            result++;
         }
         return result;
     }
@@ -49,4 +54,5 @@ public class Course {
     public String toString() {
         return "Course [id=" + id + ", title=" + title + ", type=" + type + ", students=" + this.students.toString() + ", lecturer=" + this.lecturer + "]";
     }
+
 }
