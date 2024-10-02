@@ -109,9 +109,12 @@ public class MyArray {
             }
             int countLeft = (k%2 > 0 ? k/2 +1 : k/2), countRight = k - countLeft;
             if (index == array.length) {
-                countLeft = k;            }
+                countLeft = k;
+                countRight = 0;
+            }
             if (index == 0) {
                 countRight = k;
+                countLeft = 0;
             }
             if (k/2 > index && index < size/2) {
                 countLeft = index;
@@ -142,12 +145,12 @@ public class MyArray {
             MyArray myArray2 = new MyArray(new int[]{1,3,5,1,3,7,8,9});
             MyArray myArray3 = new MyArray(new int[]{2,3,4,2,4,2,2,4,5,7});
             MyArray myArray4 = new MyArray(new int[]{10,11,12,13,14,16,17,19,20});
-            MyArray myArray5 = new MyArray(new int[]{-1,11,12,12,14,16,17,19,20});
+            MyArray myArray5 = new MyArray(new int[]{10,11,12,-1,14,16,17,19,20});
 //            printArray( myArray.mirror());
 //            printArray( myArray3.removeDuplicates());
 //            System.out.println(myArray3.isSorted());
 //            printArray(myArray4.getMissingValues());
-            printArray(myArray5.fillMissingValues(5));
+            printArray(myArray5.fillMissingValues(3));
 
         }
 

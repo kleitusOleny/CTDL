@@ -13,4 +13,21 @@ public class Student {
     public String getName() {
         return name;
     }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                '}';
+    }
 }
