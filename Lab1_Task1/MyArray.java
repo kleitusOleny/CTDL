@@ -6,9 +6,9 @@ public class MyArray {
         this.array = array;
     }
     //Task 1.1
-    /*
-    method mirror that output the contents of an array in reverse order like a mirror
-     */
+    //Method mirror that outputs the contents of an array in a
+    //reverse order like a mirror
+    //Example: input [1, 2, 3] ==> output: [1, 2, 3, 3, 2, 1]
     public int[] mirror(){
         int size = this.array.length;
         if(size == 0){
@@ -21,9 +21,10 @@ public class MyArray {
         return result;
     }
 
-    /*
-    remove all duplicate elements from an array and returns a new array
-     */
+    // removes all duplicate elements from an array and returns a
+    // new array
+    //Input: 1 3 5 1 3 7 9 8
+    //Output: 1 3 5 7 9 8
     public int[] removeDuplicates(){
         int max = 0;
         for (int i = 0; i < this.array.length - 1; i++) {
@@ -31,7 +32,6 @@ public class MyArray {
                 max = array[i+1];
             }
         }
-        System.out.println(max);
         int[]tmp = new int[max+1];
         int countLen = 0;
         for (int i = 0; i < this.array.length; i++) {
@@ -52,7 +52,9 @@ public class MyArray {
         return result;
     }
 
-    //isSorted: check whether a given array is sorted.
+    // Check whether a given array is sorted.
+    // Input: 10 11 12 13 14 16 17 19 20
+    // Output: true
     public boolean isSorted(){
         for (int i = 0; i < this.array.length - 1; i++) {
             if(this.array[i]==this.array[i+1]){continue;}
@@ -65,7 +67,7 @@ public class MyArray {
             }
             if(this.array[i] < this.array[i+1]){
                 for(int j = i+1; j < this.array.length; j++){
-                    if(this.array[j] > this.array[i]){
+                    if(this.array[j] < this.array[i]){
                         return false;
                     }
                 }
@@ -124,16 +126,11 @@ public class MyArray {
                 countRight = size - index - 1;
                 countLeft = k - countRight;
             }
-
-            System.out.println("leftIndex: " + countLeft);
-            System.out.println("rightIndex: " + countRight);
             for(int l = index-countLeft; l < index; l++){
                 sum += array[l];
-                System.out.println(array[l]);
             }
             for(int r = index+1; r <= index+countRight; r++) {
                 sum += array[r];
-                System.out.println(array[r]);
             }
 
             array[index] = sum/k;
@@ -141,16 +138,15 @@ public class MyArray {
         }
 
         public static void main(String[] args) {
-            MyArray myArray = new MyArray(new int[]{1,2,3,4});
+            MyArray myArray1 = new MyArray(new int[]{1,2,3});
             MyArray myArray2 = new MyArray(new int[]{1,3,5,1,3,7,8,9});
-            MyArray myArray3 = new MyArray(new int[]{2,3,4,2,4,2,2,4,5,7});
-            MyArray myArray4 = new MyArray(new int[]{10,11,12,13,14,16,17,19,20});
-            MyArray myArray5 = new MyArray(new int[]{10,11,12,-1,14,16,17,19,20});
-//            printArray( myArray.mirror());
-//            printArray( myArray3.removeDuplicates());
-//            System.out.println(myArray3.isSorted());
-//            printArray(myArray4.getMissingValues());
-            printArray(myArray5.fillMissingValues(3));
+            MyArray myArray3 = new MyArray(new int[]{10,11,12,13,14,16,17,19,20});
+            MyArray myArray4 = new MyArray(new int[]{10,11,12,-1,14,16,17,19,20});
+            printArray(myArray1.mirror());
+            printArray(myArray2.removeDuplicates());
+            System.out.println(myArray3.isSorted());
+            printArray(myArray3.getMissingValues());
+            printArray(myArray4.fillMissingValues(3));
 
         }
 
