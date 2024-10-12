@@ -33,12 +33,10 @@ public class Order {
     public Product[] filter(String type) {
         List<Product> filtered = new ArrayList<Product>();
         for (OrderItem item : items) {
-            if(item.containType(type)) filtered.add(item.getP());
+            if (item.containType(type)) filtered.add(item.getP());
 
         }
-        Product[]result = new Product[filtered.size()];
-        result = filtered.toArray(result);
-        return result;
+        return filtered.toArray(new Product[0]);
     }
 
     @Override
@@ -46,3 +44,4 @@ public class Order {
         return "Cost: " + this.cost();
     }
 }
+

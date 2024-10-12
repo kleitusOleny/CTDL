@@ -23,9 +23,6 @@ public class Product {
 
     @Override
     public String toString() {
-        if (this == null){
-            return "null";
-        }
         return "ID: " + id + ", Name: " + name + ", Price: " + price + ", Type: " + type;
     }
 }
