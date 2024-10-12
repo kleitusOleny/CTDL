@@ -33,14 +33,15 @@ public class Order {
     public Product[] filter(String type) {
         List<Product> filtered = new ArrayList<Product>();
         for (OrderItem item : items) {
-            if(item.containType(type)) filtered.add(item.getP());
+            if (item.containType(type)) filtered.add(item.getP());
 
         }
-        Product[]result = filtered.toArray(new Product[filtered.size()]);
-        return filtered.toArray(result);
+        return filtered.toArray(new Product[0]);
     }
 
-    public static void printArray(){
-
+    @Override
+    public String toString() {
+        return "Cost: " + this.cost();
     }
 }
+

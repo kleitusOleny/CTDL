@@ -20,4 +20,9 @@ public class Product {
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Name: " + name + ", Price: " + price + ", Type: " + type;
+    }
 }
