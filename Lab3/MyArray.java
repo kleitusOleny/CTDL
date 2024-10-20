@@ -84,12 +84,12 @@ public class MyArray {
     public static void main(String[] args) {
         int[] array = {12, 10, 9, 45, 2, 10, 10, 45};
         MyArray myArray = new MyArray(array);
-//        System.out.println("Iterative LinearSearch: " + myArray.iterativeLinearSearch(45));
-//        System.out.println("Recursive LinearSearch: " + myArray.recursiveLinearSearch(45));
+        System.out.println("Iterative LinearSearch: " + myArray.iterativeLinearSearch(45));
+        System.out.println("Recursive LinearSearch: " + myArray.recursiveLinearSearch(15));
 
         int[] array2 = {1, 2, 3, 4, 5, 6, 7, 9, 10};
         MyArray myArray2 = new MyArray(array2);
-//        System.out.println("Iterative BinarySearch: " + myArray2.iterativeBinarySearch(4));
-        System.out.println("Recursive BinarySearch: " + myArray2.recursiveBinarySearch(4));
+        System.out.println("Iterative BinarySearch: " + myArray2.iterativeBinarySearch(4));
+        System.out.println("Recursive BinarySearch: " + myArray2.recursiveBinarySearch(8));
     }
 }
