@@ -1,83 +1,155 @@
 package Lab4;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class DivideAndConquer {
     public static void mergeSort(int[] arr) {
-        if (arr.length == 1) {return;}
-        else{
-            int mid = arr.length/2;
-            int[] left = new int[mid];
-            int[] right = new int[arr.length-mid +1];
-            System.arraycopy(arr, 0, left, 0, mid);
-            System.arraycopy(arr, mid, right, 0, arr.length - mid);
-            mergeSort(left);mergeSort(right);
-            arr = merge(left,right);
+        if (arr.length == 1) {
+            return;
+        } else {
+            int mid = arr.length / 2;
+            int[] left = Arrays.copyOfRange(arr, 0, mid);
+            int[] right = Arrays.copyOfRange(arr, mid, arr.length);
+            mergeSort(left);
+            mergeSort(right);
+            merge(left, right, arr);
         }
     }
 
-    public static int[] merge(int[] arr1, int[]arr2) {
-        int[] result = new int[arr1.length + arr2.length];
+    public static void merge(int[] arr1, int[] arr2, int[] arr) {
         int count = 0;
         int i = 0, j = 0;
         while (i < arr1.length && j < arr2.length) {
             if (arr1[i] < arr2[j]) {
-                result[count++] = arr1[i++];
-            }else{
-                result[count++] = arr2[j++];
+                arr[count++] = arr1[i++];
+            } else {
+                arr[count++] = arr2[j++];
             }
         }
         while (i < arr1.length) {
-            result[count++] = arr1[i++];
+            arr[count++] = arr1[i++];
         }
         while (j < arr2.length) {
-            result[count++] = arr2[j++];
+            arr[count++] = arr2[j++];
         }
 
-        return result;
     }
 
-    static void quickSort(int[] array, int lowIndex, int highIndex) {
-        if (lowIndex < highIndex) {
-            int partitionIndex = partition(array, lowIndex, highIndex);
+    public static void quickSort(int[] arr) {
+        helpQuickSort(arr, 0, arr.length - 1);
+    }
 
-            quickSort(array, lowIndex, partitionIndex - 1);
-            quickSort(array, partitionIndex + 1, highIndex);
+    public static void helpQuickSort(int[] arr, int left, int right) {
+        if (arr.length > 2) {
+            int pivot = getPivotMedianOfThree(arr);
+            int[] lower = getLowerArray(arr, pivot);
+            int[] upper = getUpperArray(arr, pivot);
+
+            quickSort(lower);
+            quickSort(upper);
+
+            mergeQuickSort(arr, lower, upper, pivot);
         }
     }
 
-    static int partition(int[] array, int lowIndex, int highIndex) {
-        int pivot = array[highIndex];
-        int i = (lowIndex - 1);
-
-        for (int j = lowIndex; j < highIndex; j++) {
-            if (array[j] < pivot) {
-                i++;
-                swap(array, i, j);
+    private static int[] getLowerArray(int[] arr, int pivot) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < pivot) {
+                list.add(arr[i]);
             }
         }
-        swap(array, i + 1, highIndex);
-        return (i + 1);
+        int[] lower = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            lower[i] = list.get(i);
+        }
+        return lower;
     }
 
-    static void swap(int[] arr, int i, int j) {
+    private static int[] getUpperArray(int[] arr, int pivot) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > pivot) {
+                list.add(arr[i]);
+            }
+        }
+        int[] upper = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            upper[i] = list.get(i);
+        }
+        return upper;
+    }
+
+    public static void mergeQuickSort(int[] arr, int[] low, int[] high, int pivot) {
+        int index = 0;
+        int lowIndex = 0;
+        int highIndex = 0;
+        for (int i = 0; i < low.length; i++) {
+            arr[index++] = low[i];
+        }
+        arr[index++] = pivot;
+        for (int i = 0; i <= high.length; i++) {
+            arr[index++] = high[i];
+        }
+    }
+
+    public static int getPivotMedianOfThree(int[] array) {
+        int low = array[0], high = array[array.length - 1];
+        int mid = array[(array.length) / 2];
+        if (low > high) {
+            if (low > mid) {
+                return low;
+            } else if (high > mid) {
+                return high;
+            } else return mid;
+        } else {
+            if (low > mid) {
+                return low;
+            } else if (high < mid) {
+                return high;
+            } else return mid;
+        }
+    }
+
+    public static int getPivotFirst(int[] array) {
+        return array[0];
+    }
+
+    public static int getPivotLast(int[] array) {
+        return array[array.length - 1];
+    }
+
+    public static int getPivotRandom(int[] array) {
+        Random random = new Random();
+        return array[random.nextInt(array.length - 1)];
+    }
+
+
+    public static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
-
-
-
     public static void main(String[] args) {
-        int[] arr1 = {85,24,63,45,17,31,96,50};
-//        mergeSort(arr1);
-//        System.out.println(Arrays.toString(arr1));
+        //Test Time
+        long sum = 0;
+        int[] randomArray = generateArray(1000);
+        long startTime = System.currentTimeMillis();
+        quickSort(randomArray);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Program Took :" + (endTime - startTime) + " ms");
 
-        int[]arr2 = {1,4,7};
-        int[]arr3 ={2,5,6,8};
-//        System.out.println(Arrays.toString(merge(arr3,arr2)));
-        quickSort(arr1,0,arr1.length-1);
-        System.out.println(Arrays.toString(arr1));
+    }
+
+    public static int[] generateArray(int len) {
+        int[] arr = new int[len];
+        Random random = new Random();
+        for (int i = 0; i < len; i++) {
+            arr[i] = random.nextInt(100);
+        }
+        return arr;
     }
 }
