@@ -91,7 +91,7 @@ public class Task2 {
             arr[index++] = low[i];
         }
         arr[index++] = pivot;
-        for (int i = 0; i <= high.length; i++) {
+        for (int i = 0; i < high.length; i++) {
             arr[index++] = high[i];
         }
     }
@@ -120,10 +120,12 @@ public class Task2 {
     public static int getPivotFirst(int[] array) {
         return array[0];
     }
+
     //get last element, 1 7 3 ->3
     public static int getPivotLast(int[] array) {
         return array[array.length - 1];
     }
+
     //get random element
     public static int getPivotRandom(int[] array) {
         Random random = new Random();
@@ -138,23 +140,13 @@ public class Task2 {
     }
 
     public static void main(String[] args) {
-        //Test Time
-        //Task 3.2
-        long sum = 0;
-        int[] randomArray = getArray(1000);
-        long startTime = System.currentTimeMillis();
-        quickSort(randomArray);
-        long endTime = System.currentTimeMillis();
-        System.out.println("Program Took :" + (endTime - startTime) + " ms");
+        int[] arr1 = {85,24,63,45,17,31,96,50};
+        mergeSort(arr1);
+        System.out.println(Arrays.toString(arr1));
 
-    }
-    //Task 3.1
-    public static int[] getArray(int len) {
-        int[] arr = new int[len];
-        Random random = new Random();
-        for (int i = 0; i < len; i++) {
-            arr[i] = random.nextInt(100);
-        }
-        return arr;
+        int[] arr2 = {85,24,63,45,17,31,96,50};
+        quickSort(arr2);
+        System.out.println(Arrays.toString(arr2));
+
     }
 }
