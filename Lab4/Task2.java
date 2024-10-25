@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class DivideAndConquer {
+public class Task2 {
     public static void mergeSort(int[] arr) {
         if (arr.length == 1) {
             return;
@@ -136,7 +136,7 @@ public class DivideAndConquer {
     public static void main(String[] args) {
         //Test Time
         long sum = 0;
-        int[] randomArray = generateArray(1000);
+        int[] randomArray = getArray(1000);
         long startTime = System.currentTimeMillis();
         quickSort(randomArray);
         long endTime = System.currentTimeMillis();
@@ -144,7 +144,7 @@ public class DivideAndConquer {
 
     }
 
-    public static int[] generateArray(int len) {
+    public static int[] getArray(int len) {
         int[] arr = new int[len];
         Random random = new Random();
         for (int i = 0; i < len; i++) {
