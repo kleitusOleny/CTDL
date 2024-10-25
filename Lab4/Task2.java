@@ -37,6 +37,7 @@ public class Task2 {
 
     }
 
+    ///QuickSort
     public static void quickSort(int[] arr) {
         helpQuickSort(arr, 0, arr.length - 1);
     }
@@ -95,6 +96,8 @@ public class Task2 {
         }
     }
 
+    //get Pivot for quicksort
+    //get median, 1 7 3 -> 3
     public static int getPivotMedianOfThree(int[] array) {
         int low = array[0], high = array[array.length - 1];
         int mid = array[(array.length) / 2];
@@ -113,14 +116,15 @@ public class Task2 {
         }
     }
 
+    //get first element, 1 7 3 ->1
     public static int getPivotFirst(int[] array) {
         return array[0];
     }
-
+    //get last element, 1 7 3 ->3
     public static int getPivotLast(int[] array) {
         return array[array.length - 1];
     }
-
+    //get random element
     public static int getPivotRandom(int[] array) {
         Random random = new Random();
         return array[random.nextInt(array.length - 1)];
@@ -135,6 +139,7 @@ public class Task2 {
 
     public static void main(String[] args) {
         //Test Time
+        //Task 3.2
         long sum = 0;
         int[] randomArray = getArray(1000);
         long startTime = System.currentTimeMillis();
@@ -143,7 +148,7 @@ public class Task2 {
         System.out.println("Program Took :" + (endTime - startTime) + " ms");
 
     }
-
+    //Task 3.1
     public static int[] getArray(int len) {
         int[] arr = new int[len];
         Random random = new Random();
