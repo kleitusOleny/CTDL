@@ -1,9 +1,9 @@
 package Lab4;
 
+import java.util.Arrays;
 
 public class Task1 {
     public static void selectionSort(int[] arr) {
-
         for (int k = 0; k < arr.length; k++) {
             int minIndex = k;
             for (int i = k; i < arr.length; i++) {
@@ -20,10 +20,10 @@ public class Task1 {
     public static void bubbleSort(int[] arr) {
         for (int k = 0; k < arr.length; k++) {
             for (int i = 0; i < arr.length - k - 1; i++) {
-                if(arr[i] > arr[i+1]) {
+                if (arr[i] < arr[i + 1]) {
                     int temp = arr[i];
-                    arr[i] = arr[i+1];
-                    arr[i+1] = temp;
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
                 }
             }
         }
@@ -42,14 +42,17 @@ public class Task1 {
     }
 
 
-
-
     public static void main(String[] args) {
-        int[] randomArray = Task2.getArray(500000);
-        long startTime = System.currentTimeMillis();
-        bubbleSort(randomArray);
-        long endTime = System.currentTimeMillis();
-        System.out.println("Program Took: " + (endTime - startTime) + " ms");
+        int[] arr1 = {85,24,63,45,17,31,96,50};
+        selectionSort(arr1);
+        System.out.println(Arrays.toString(arr1));
 
+        int[] arr2 = {85,24,63,45,17,31,96,50};
+        bubbleSort(arr2);
+        System.out.println(Arrays.toString(arr2));
+
+        int[] arr3 = {85,24,63,45,17,31,96,50};
+        insertionSort(arr3);
+        System.out.println(Arrays.toString(arr3));
     }
 }
