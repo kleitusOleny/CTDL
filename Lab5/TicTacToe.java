@@ -14,7 +14,6 @@ public class TicTacToe {
             for (int j = 1; j < board[0].length; j++) {
                 if (board[i][0] == board[i][j] && board[i][j] != EMPTY) {
                     count++;
-                    System.out.println(count);
                 }
             }
             if (count == board.length - 1) return true;
@@ -22,13 +21,12 @@ public class TicTacToe {
         return false;
     }
     
-    public boolean checkCollum() {
+    public boolean checkColum() {
         for (int i = 0; i < board[0].length; i++) {
             int count = 0;
             for (int j = 1; j < board.length; j++) {
                 if (board[0][i] == board[j][i] && board[j][i] != EMPTY) {
                     count++;
-                    System.out.println(count);
                 }
             }
             if (count == board[0].length - 1) return true;
@@ -55,11 +53,12 @@ public class TicTacToe {
     }
     
     public static void main(String[] args) {
-        char[][] ch =
-                {       {'O', 'X', 'O'},
+        char[][] ch = {{' ', '0', 'X'},
                         {'O', 'X', 'O'},
-                        {'O', 'X', 'O'}};
+                        {'X', 'O', 'X'}};
         TicTacToe t = new TicTacToe(ch);
-        System.out.println(t.checkDiagonals());
+        System.out.println("Col: " + t.checkColum());
+        System.out.println("Row: " + t.checkRow());
+        System.out.println("Diagonals: " + t.checkDiagonals());
     }
 }
