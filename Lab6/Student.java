@@ -3,11 +3,11 @@ package Lab6;
 import java.time.LocalDate;
 
 public class Student {
-    private String id;
-    private String firstName;
-    private String lastName;
-    private LocalDate birthday;
-    private double GPA;
+    private final String id;
+    private final String firstName;
+    private final String lastName;
+    private final LocalDate birthday;
+    private final double GPA;
     
     public Student(String id, String firstName, String lastName, LocalDate birthday, double GPA) {
         this.id = id;
@@ -38,5 +38,17 @@ public class Student {
     
     public LocalDate getBirthday() {
         return birthday;
+    }
+    
+    public boolean isID(String id) {
+        return this.id.equals(id);
+    }
+    
+    public boolean inBirthYear(int birthYear) {
+        return this.birthday.getYear() == birthYear;
+    }
+    
+    public boolean isBirthDayInMonth() {
+        return this.birthday.getMonth() == LocalDate.now().getMonth();
     }
 }
