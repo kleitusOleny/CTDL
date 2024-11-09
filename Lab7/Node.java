@@ -57,5 +57,5 @@ public class Node {
 	public boolean isZeroCoefficient() {
 		return this.coefficient == 0;
 	}
-
+	
 }

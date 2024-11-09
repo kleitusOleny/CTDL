@@ -8,7 +8,7 @@ public class Test {
 		poly1.add(new Node(0, 10));
 		poly1.add(new Node(7, 5));
 		poly1.add(new Node(5, -1));
-
+//5^7 + -1^5 + 3^4 + 2^3 +10
 		System.out.println("R1: " + poly1);
 		Polynomial poly2 = new Polynomial();
 		poly2.add(new Node(0, 2));
@@ -26,7 +26,7 @@ public class Test {
 		poly5.add(new Node(0, 2));
 		poly5.add(new Node(2, 3));
 		System.out.println("R5: "+poly5);
-
+//
 		Polynomial poly6 = poly5.multiply(poly1);
 		System.out.println("R6=R5*R1: " + poly6);
 	}
