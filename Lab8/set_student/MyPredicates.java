@@ -21,8 +21,10 @@ public class MyPredicates {
 	// Remove every object, obj, from coll for which
 	// pr.test(obj) is false. (That is, retain the
 	// objects for which the predicate is true.)
+	// loai bo obj predicate tra ve false
 	public static <T> void retain(Collection<T> coll, Predicate<T> p) {
-		// TODO
+		
+	
 	}
 
 	// Return a Set that contains all unique objects, obj,

@@ -1,13 +1,12 @@
 package Lab8.set_student;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.io.Serial;
+import java.util.*;
 
 public class MyWordCount {
 	// public static final String fileName = "data/hamlet.txt";
-	public static final String fileName = "data/fit.txt";
+	public static final String fileName = "Lab8/data/fit.txt";
 
 	private List<String> words = new ArrayList<>();
 
@@ -54,36 +53,76 @@ public class MyWordCount {
 	// Returns the words that their appearance are 1, do not consider duplidated
 	// words
 	public Set<String> getUniqueWords() {
-		return null;
+		List<WordCount> wcs = this.getWordCounts();
+		Set<String> res = new HashSet<>();
+		for (WordCount wc : wcs){
+			if (wc.getCount() == 1){
+				res.add(wc.getWord());
+			}
+		}
+		return res;
 	}
 
 	// Returns the words in the text file, duplicated words appear once in the
 	// result
 	public Set<String> getDistinctWords() {
-		// TODO
-		return null;
+		List<WordCount> wcs = this.getWordCounts();
+		Set<String> res = new HashSet<>();
+		for (WordCount wc : wcs){
+			res.add(wc.getWord());
+		}
+		return res;
 	}
 
 	// Prints out the number of times each unique token appears in the file
 	// data/hamlet.txt (or fit.txt) according ascending order of tokens
 	// Example: An - 3, Bug - 10, ...
 	public Set<WordCount> printWordCounts() {
-		// TODO
-		return null;
+		TreeSet<WordCount> treeSet = new TreeSet<>(new Comparator<WordCount>() {
+			@Override
+			public int compare(WordCount o1, WordCount o2) {
+				return (o2.getWord().compareTo(o1.getWord()));
+			}
+		});
+		treeSet.addAll(this.getWordCounts());
+		return treeSet;
 	}
 
 	// Prints out the number of times each unique token appears in the file
 	// data/hamlet.txt (or fit.txt) according descending order of occurences
 	// Example: Bug - 10, An - 3, Nam - 2.
 	public Set<WordCount> exportWordCountsByOccurence() {
-		// TODO
-		return null;
+		TreeSet<WordCount> treeSet = new TreeSet<>(new Comparator<WordCount>() {
+			@Override
+			public int compare(WordCount o1, WordCount o2) {
+				int c1 = o1.getCount(); int c2 = o2.getCount();
+				return (c2 - c1 != 0 ? c2 - c1 : o2.getWord().compareTo(o1.getWord()));
+			}
+		});
+		treeSet.addAll(this.getWordCounts());
+		return treeSet;
 	}
 
 	// delete words beginning with the given pattern (i.e., delete words begin with
 	// 'A' letter
 	public Set<String> filterWords(String pattern) {
-		// TODO
-		return null;
+		Set<String> res = new LinkedHashSet<>();
+		List<WordCount> wcs = this.getWordCounts();
+		for (String wc : words){
+			if (!wc.startsWith(pattern)){
+				res.add(wc);
+			}
+		}
+		return res;
+	}
+	
+	public static void main(String[] args) {
+		MyWordCount myWordCount = new MyWordCount();
+//		System.out.println(myWordCount.getWordCounts());
+		
+		System.out.println(myWordCount.exportWordCountsByOccurence());
+		
+		System.out.println(myWordCount.filterWords("N"));
+		
 	}
 }
