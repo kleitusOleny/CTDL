@@ -12,7 +12,9 @@ public class TestPredicates {
 		list.add(4);
 		list.add(5);
 		System.out.println("Before: "+list);
-		MyPredicates.remove(list, new Even());
+		MyPredicates.find(list, new Even());
 		System.out.println("After: "+list);
+		
+		
 	}
 }

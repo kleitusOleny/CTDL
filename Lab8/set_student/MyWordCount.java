@@ -1,12 +1,11 @@
 package Lab8.set_student;
 
 import java.io.FileNotFoundException;
-import java.io.Serial;
 import java.util.*;
 
 public class MyWordCount {
 	// public static final String fileName = "data/hamlet.txt";
-	public static final String fileName = "Lab8/data/fit.txt";
+	public static final String fileName = "data/fit.txt";
 
 	private List<String> words = new ArrayList<>();
 
