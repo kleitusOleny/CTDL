@@ -1,8 +1,11 @@
-package Lab8.set_student;
+package lab9_map;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class TestReadFile {
 	public static void main(String[] args) throws FileNotFoundException {
@@ -13,5 +16,7 @@ public class TestReadFile {
 			String word = input.next();
 			System.out.println(word);
 		}
+		
+		
 	}
 }

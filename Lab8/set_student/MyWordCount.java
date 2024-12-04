@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class MyWordCount {
-	// public static final String fileName = "data/hamlet.txt";
+//	 public static final String fileName = "data/hamlet.txt";
 	public static final String fileName = "data/fit.txt";
 
 	private List<String> words = new ArrayList<>();
@@ -80,7 +80,8 @@ public class MyWordCount {
 		TreeSet<WordCount> treeSet = new TreeSet<>(new Comparator<WordCount>() {
 			@Override
 			public int compare(WordCount o1, WordCount o2) {
-				return (o2.getWord().compareTo(o1.getWord()));
+				int c1 = o1.getCount(); int c2 = o2.getCount();
+				return ((o1.getWord().compareTo(o2.getWord()) != 0) ? (o1.getWord().compareTo(o2.getWord())) :  c2 - c1);
 			}
 		});
 		treeSet.addAll(this.getWordCounts());
@@ -114,14 +115,5 @@ public class MyWordCount {
 		}
 		return res;
 	}
-	
-	public static void main(String[] args) {
-		MyWordCount myWordCount = new MyWordCount();
-//		System.out.println(myWordCount.getWordCounts());
-		
-		System.out.println(myWordCount.exportWordCountsByOccurence());
-		
-		System.out.println(myWordCount.filterWords("N"));
-		
-	}
+
 }
