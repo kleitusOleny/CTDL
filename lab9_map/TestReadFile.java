@@ -16,5 +16,7 @@ public class TestReadFile {
 			String word = input.next();
 			System.out.println(word);
 		}
+		
+		
 	}
 }
