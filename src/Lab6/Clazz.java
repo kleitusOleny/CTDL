@@ -136,7 +136,7 @@ public class Clazz {
     }
     
     public static void main(String[] args) throws IOException {
-        String url = "./data/students.txt";
+        String url = "data/students.txt";
         Clazz cls = new Clazz("DT", "2023");
         cls.loadStudents(url);
         
