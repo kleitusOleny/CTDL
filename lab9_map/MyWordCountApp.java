@@ -48,21 +48,7 @@ public class MyWordCountApp {
 	// Example: An - 3, Bug - 10, ...
 	public void printWordCountsAlphabet() {
 		// TODO
-		Map<String, Integer> treeMap = new TreeMap<>();
-		treeMap.putAll(map);
+        Map<String, Integer> treeMap = new TreeMap<>(map);
 		System.out.println(treeMap);
-	}
-	
-	public static void main(String[] args)throws IOException{
-		MyWordCountApp wordCount = new MyWordCountApp();
-		wordCount.loadData();
-		
-		System.out.println(wordCount.map.toString());
-		
-		System.out.println(wordCount.countUnique());
-		
-		wordCount.printWordCounts();
-		
-		wordCount.printWordCountsAlphabet();
 	}
 }

@@ -5,13 +5,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import static java.util.Map.*;
+
 public class TextAnalyzer {
 	// <word, its positions>
 	private Map<String, ArrayList<Integer>> map = new HashMap<String, ArrayList<Integer>>();
 
 	// load words in the text file given by fileName and store into map by using add
 	// method in Task 2.1.
-	// Using BufferedReader reffered in file TextFileUtils.java
+	// Using BufferedReader referred in file TextFileUtils.java
 	public void load(String fileName) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(fileName));
 		String line = null;
@@ -39,17 +41,18 @@ public class TextAnalyzer {
 
 	public void add(String word, int position) {
 		// TODO
-		ArrayList<Integer> arrayList =  new ArrayList<Integer>();
-		map.getOrDefault(word, arrayList).add(position);
-		map.put(word, map.getOrDefault(word, arrayList));
+		map.computeIfAbsent(word, k -> new ArrayList<>()).add(position);
 	}
 
 	// This method should display the words of the text file along with the
 	// positions of each word, one word per line, in alphabetical order
 	public void displayWords() {
-		for (Map.Entry entry: map.entrySet()){
-			System.out.println(entry);
-		}
+		Map<String, ArrayList<Integer>> treeMap = new TreeMap<>(map);
+		System.out.println("Word Word \t Position(s)");
+		System.out.println("=========================");
+        treeMap.forEach((key, value) -> {
+            System.out.println(((String) key).toUpperCase() + "\t\t\t" + value);
+        });
 	}
 
 	// This method will display the content of the text file stored in the map
@@ -62,28 +65,15 @@ public class TextAnalyzer {
 
 	// This method will return the word that occurs most frequently in the text file
 	public String mostFrequentWord() {
-		int maxFrequently = 0;
-		Map.Entry<String,List> res = null;
-		for (Map.Entry entry : map.entrySet()){
-			int entryFrequently = ((ArrayList)entry.getValue()).size();
-			if ( entryFrequently > maxFrequently) {
-				maxFrequently = entryFrequently;
+		int mostFrequently = 0;
+		Map.Entry<String,ArrayList<Integer>> res = null;
+		for (Map.Entry<String,ArrayList<Integer>> entry : map.entrySet()){
+			int entryFrequently = entry.getValue().size();
+			if (entryFrequently > mostFrequently) {
+				mostFrequently = entryFrequently;
 				res = entry;
 			}
 		}
-		return res.getKey();
-	}
-	
-	public static void main(String[] args) throws IOException {
-		TextAnalyzer textA = new TextAnalyzer();
-		
-		textA.load("data/length.txt");
-		System.out.println(textA.map);
-		
-		textA.displayWords();
-		
-		textA.displayText();
-		
-		System.out.println("occurs most frequently word: " + textA.mostFrequentWord());
+        return res.getKey();
 	}
 }
