@@ -19,4 +19,28 @@ public class Order {
         this.customer = customer;
         this.items = items;
     }
+    
+    public Long getIod() {
+        return iod;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+    
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+    
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+    
+    public Customer getCustomer() {
+        return customer;
+    }
+    
+    public List<OrderItem> getItems() {
+        return items;
+    }
 }

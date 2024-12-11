@@ -10,4 +10,16 @@ public class Customer {
         this.name = name;
         this.tier = tier;
     }
+    
+    public Long getCid() {
+        return cid;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getTier() {
+        return tier;
+    }
 }

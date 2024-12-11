@@ -1,5 +1,16 @@
 package lab10.task4;
 
-public class OrderManager {
+import java.util.*;
 
+
+public class OrderManager {
+    List<Order> orders;
+    
+    public OrderManager(List<Order> orders) {
+        this.orders = orders;
+    }
+    
+    public List<Product> getProductsHigherThanThreshold(double threshold){
+       return null;
+    }
 }

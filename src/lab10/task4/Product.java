@@ -12,4 +12,20 @@ public class Product {
         this.category = category;
         this.price = price;
     }
+    
+    public Long getPid() {
+        return pid;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
 }
