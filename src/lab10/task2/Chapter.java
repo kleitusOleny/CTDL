@@ -9,6 +9,11 @@ public class Chapter {
         this.pageNumber = pageNumber;
     }
     
+    @Override
+    public String toString() {
+        return "Chapter{" +titleChapter + '\'' + "," + pageNumber + '}';
+    }
+    
     public int getPageNumber() {
         return pageNumber;
     }

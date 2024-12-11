@@ -14,12 +14,17 @@ public class ReferenceBook extends Publication{
     
     @Override
     public String getTypeOfPublication() {
-        return "" + this.getClass();
+        return "Reference Book";
     }
     
     @Override
     public boolean checkYearPublication() {
         return false;
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "ReferenceBook{" + "field='" + field + '\'' + ", chapters=" + chapters + "}}";
     }
     
     public int getMaxChapterPageNum(){
@@ -34,6 +39,11 @@ public class ReferenceBook extends Publication{
     
     @Override
     public boolean checkMagazineTitle(String title) {
+        return false;
+    }
+    
+    @Override
+    public boolean getMagazineAround1year() {
         return false;
     }
 }

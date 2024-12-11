@@ -18,4 +18,37 @@ public class Book {
         this.year = year;
         this.authors = authors;
     }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
+    
+    public String getType() {
+        return type;
+    }
+    
+    public int getYear() {
+        return year;
+    }
+    
+    public List<Author> getAuthors() {
+        return authors;
+    }
+    
+    public boolean isSameAuthorInYear(String authorName, int year) {
+        for (Author author : authors){
+            if (author.getName().equals(authorName) && this.year == year){
+                return true;
+            }
+        }
+        return false;
+    }
 }

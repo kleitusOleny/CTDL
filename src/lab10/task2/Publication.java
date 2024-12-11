@@ -55,12 +55,23 @@ public abstract class Publication {
         this.price = price;
     }
     
+    @Override
+    public String toString() {
+        return "Publication{" +
+                "title='" + title + '\'' +
+                ", pageNumber=" + pageNumber +
+                ", yearPublication=" + yearPublication +
+                ", AuthorName='" + AuthorName + '\'' +
+                ", price=" + price + ", ";
+    }
+    
     public abstract String getTypeOfPublication();
     public abstract boolean checkYearPublication();
     public boolean checkAuthor(Publication that){
-        return this.AuthorName.compareTo(that.AuthorName) == 0;
+        return this.AuthorName.equals(that.AuthorName);
     }
     
     public abstract int getMaxChapterPageNum();
     public abstract boolean checkMagazineTitle(String title);
+    public abstract boolean getMagazineAround1year();
 }

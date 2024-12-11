@@ -2,6 +2,8 @@ package lab10.task2;
 
 import java.time.LocalDate;
 
+import static java.lang.Math.abs;
+
 public class Magazine extends Publication{
     private String title;
     
@@ -12,12 +14,12 @@ public class Magazine extends Publication{
     
     @Override
     public String getTypeOfPublication() {
-        return "" + this.getClass();
+        return "Magazine";
     }
     
     @Override
     public boolean checkYearPublication() {
-        return (LocalDate.now().getYear() - this.getYearPublication() <= 10);
+        return (abs(LocalDate.now().getYear() - this.getYearPublication()) <= 10);
     }
     
     @Override
@@ -28,6 +30,11 @@ public class Magazine extends Publication{
     @Override
     public boolean checkMagazineTitle(String title) {
         return this.title.equals(title);
+    }
+    
+    @Override
+    public boolean getMagazineAround1year() {
+        return (abs(LocalDate.now().getYear() - this.getYearPublication()) <= 1);
     }
     
     
