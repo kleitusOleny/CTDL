@@ -2,6 +2,7 @@ package lab10.task4;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Order {
     private Long iod;
@@ -42,5 +43,10 @@ public class Order {
     
     public List<OrderItem> getItems() {
         return items;
+    }
+    
+    public List<OrderItem> getProductHigher(double threshold){
+        List<OrderItem> ps = items.stream().filter(orderItem -> orderItem.getP().getPrice() > threshold).collect(Collectors.toList());
+        return ps;
     }
 }
