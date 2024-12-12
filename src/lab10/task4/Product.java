@@ -28,4 +28,17 @@ public class Product {
     public double getPrice() {
         return price;
     }
+    public void setPrice() {
+        this.price = (int) (this.price*0.9);
+    }
+    
+    @Override
+    public String toString() {
+        return "Product{" +
+                "pid=" + pid +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

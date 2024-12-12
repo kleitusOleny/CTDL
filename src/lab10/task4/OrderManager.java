@@ -10,7 +10,4 @@ public class OrderManager {
         this.orders = orders;
     }
     
-    public List<Product> getProductsHigherThanThreshold(double threshold){
-       return null;
-    }
 }

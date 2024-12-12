@@ -16,4 +16,12 @@ public class OrderItem {
     public Product getP() {
         return p;
     }
+    
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "quantity=" + quantity +
+                ", p=" + p +
+                '}';
+    }
 }
