@@ -45,6 +45,13 @@ public class Order {
         return items;
     }
     
+    @Override
+    public String toString() {
+        return "Order{" +
+                "iod=" + iod +
+                '}';
+    }
+    
     public List<Product> getProductHigher(int threshold, String category) {
         return items.stream().map(OrderItem::getP).filter(p -> p.getCategory().equals(category) && p.getPrice() >= threshold).collect(Collectors.toList());
     }
