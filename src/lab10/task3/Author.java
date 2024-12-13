@@ -16,4 +16,12 @@ public class Author {
     public int getBirthYear() {
         return birthYear;
     }
+    
+    @Override
+    public String toString() {
+        return "Author{" +
+                "name='" + name + '\'' +
+                ", birthYear=" + birthYear +
+                '}';
+    }
 }

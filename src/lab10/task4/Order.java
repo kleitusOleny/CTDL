@@ -83,7 +83,6 @@ public class Order {
         
         
         Order order = new Order(1L,"available",LocalDate.of(2024,12,10),LocalDate.of(2024,12,12),customer1,orderItemList1);
-        
 //        System.out.println(order.getProductHigher(10000,"Food"));
 //
 //        order.decreaseAllByCategory("Drink");

@@ -2,6 +2,7 @@ package lab10.task1;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.*;
 
 public class OrderManager {
     private List<Order> orders;
@@ -18,6 +19,10 @@ public class OrderManager {
         return product;
     }
     
+    public Optional<Product> maxProductJava8(){
+        return orders.stream().flatMap(order -> order.getItems().stream().map(OrderItem::getItem)).max((o1, o2) -> Integer.compare(o1.getPrice(),o2.getPrice()));
+    }
+    
     public HashMap<String, Integer> productTypesStatistics(){
         HashMap<String, Integer> res = new HashMap<>();
         
@@ -28,6 +33,10 @@ public class OrderManager {
             }
         }
         return res;
+    }
+    
+    public Map<String, Integer> productTypesStatisticsJava8(){
+        return orders.stream().flatMap(order -> order.getItems().stream()).collect(Collectors.toMap(o -> o.getItem().getType(), OrderItem::getAmount,Integer::sum));
     }
     
     public TreeSet<Order>ordersByCost(){
@@ -44,8 +53,14 @@ public class OrderManager {
         return result;
     }
     
+    public Set<Order>ordersByCostJava8(){
+        Set<Order> res = new TreeSet<Order>(((o1, o2) -> (o1.totalPrice() - o2.totalPrice() != 0 ? o1.totalPrice() - o2.totalPrice() : o1.getDate().compareTo(o2.getDate()))));
+        res.addAll(orders);
+        return res;
+    }
+    
     public static void main(String[] args) {
-        Product p1 = new Product("A","T",250000,LocalDate.of(2024,5,1));
+        Product p1 = new Product("A","T",270000,LocalDate.of(2024,5,1));
         Product p2 = new Product("B","T",150000,LocalDate.of(2024,5,2));
         Product p3 = new Product("C","V",200000,LocalDate.of(2024,5,3));
         Product p4 = new Product("D","V",250000,LocalDate.of(2024,5,3));
@@ -72,11 +87,11 @@ public class OrderManager {
         
         OrderManager orderManager = new OrderManager(orderList);
         
-        System.out.println(orderManager.maxProduct());
+        System.out.println(orderManager.maxProductJava8());
         
-        System.out.println(orderManager.productTypesStatistics());
-        
-        System.out.println(orderManager.ordersByCost());
+        System.out.println(orderManager.productTypesStatisticsJava8());
+
+        System.out.println(orderManager.ordersByCostJava8());
         
     }
 }
