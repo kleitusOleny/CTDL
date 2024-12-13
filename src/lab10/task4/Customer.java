@@ -22,4 +22,13 @@ public class Customer {
     public int getTier() {
         return tier;
     }
+    
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "cid=" + cid +
+                ", name='" + name + '\'' +
+                ", tier=" + tier +
+                '}';
+    }
 }
