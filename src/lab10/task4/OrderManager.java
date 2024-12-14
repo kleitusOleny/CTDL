@@ -21,7 +21,8 @@ public class OrderManager {
    }
    
    public List<Order>get3OrderRecent(){
-        return orders.stream().sorted((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate())).limit(3).collect(Collectors.toList());
+        return orders.stream().sorted((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate())).limit(3)
+                .collect(Collectors.toList());
    }
    
    public List<Order>getAllOrderOnDate(LocalDate date){
@@ -29,13 +30,32 @@ public class OrderManager {
    }
    
    public double getCostInYearMonth(int year, int month){
-        return orders.stream().filter(order -> order.getOrderDate().getYear() == year).filter(order -> order.getOrderDate().getMonth().getValue() == month).flatMap(order -> order.getItems().stream()).mapToDouble(value -> value.getQuantity()*value.getP().getPrice()).sum();
+        return orders.stream().filter(order -> order.getOrderDate().getYear() == year)
+                .filter(order -> order.getOrderDate().getMonth().getValue() == month)
+                .flatMap(order -> order.getItems().stream())
+                .mapToDouble(value -> value.getQuantity()*value.getP().getPrice()).sum();
    }
    
    public double getAVGCostInDate(LocalDate date){
-        return orders.stream().filter(order -> order.getOrderDate().equals(date)).flatMap(order -> order.getItems().stream()).mapToDouble(value -> value.getQuantity()*value.getP().getPrice()).sum()/orders.stream().filter(order -> order.getOrderDate().equals(date)).count();
+        return orders.stream().filter(order -> order.getOrderDate().equals(date))
+                .flatMap(order -> order.getItems().stream())
+                .mapToDouble(value -> value.getQuantity()*value.getP().getPrice()).sum()/
+                orders.stream().filter(order -> order.getOrderDate().equals(date)).count();
    }
-    public static void main(String[] args) {
+   
+   public Map<Long,Integer> statsAllOrder(){
+        return orders.stream().collect(Collectors.toMap(Order::getIod,order -> order.getItems().stream().mapToInt(OrderItem::getQuantity).sum(),Integer::sum));
+   }
+   
+   
+   public Map<Long,List<Order>> getCustomerOrder() {
+       return orders.stream().collect(Collectors.groupingBy(order -> order.getCustomer().getCid()));
+   }
+   
+   public Map<Long,Double> getOrderCost(){
+        return orders.stream().collect(Collectors.toMap(Order::getIod, order -> order.getItems().stream().mapToDouble(value -> value.getQuantity()*value.getP().getPrice()).sum(),Double::sum));
+   }
+   public static void main(String[] args) {
         Product p1 = new Product(1L,"Kem","Food",10000);
         Product p2 = new Product(2L,"Tra sua","Drink",20000);
         Product p3 = new Product(3L,"Banh Trang Tron","Food",15000);
@@ -84,5 +104,11 @@ public class OrderManager {
 //        System.out.println(orderManager.getCostInYearMonth(2024,2));
         
 //        System.out.println(orderManager.getAVGCostInDate(LocalDate.of(2024,3,15)));
-    }
+        
+//        System.out.println(orderManager.statsAllOrder());
+       
+//       System.out.println(orderManager.getCustomerOrder());
+       
+//       System.out.println(orderManager.getOrderCost());
+   }
 }
