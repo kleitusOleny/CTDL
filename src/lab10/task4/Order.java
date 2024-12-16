@@ -61,15 +61,17 @@ public class Order {
     }
     
     public Optional<Product> getCheapestProduct(){
-        return items.stream().map(OrderItem::getP).min((o1, o2) -> (int) (o1.getPrice() - o2.getPrice()));
+        return items.stream().map(OrderItem::getP).min((o1, o2) -> Double.compare(o1.getPrice(),o2.getPrice()));
     }
     
-    public Optional<Product> getStaticsProduct(String category, Product product){
-        return items.stream().map(OrderItem::getP).filter(p -> p.getCategory().equals(category)).filter(p -> p.equals(product)).findFirst();
+    public Map<String,List<Product>> getStaticsProduct(){
+        return items.stream().map(orderItem -> orderItem.getP()).collect(Collectors.groupingBy(Product::getCategory));
     }
     
     public Map<String,String> getExpensiveProductByCategory(String category){
-        return items.stream().map(OrderItem::getP).filter(p -> p.getCategory().equals(category)).collect(Collectors.toMap(Product::getCategory, Product::getName));
+        return items.stream().map(OrderItem::getP).filter(product -> product.getCategory().equals(category))
+                .max((o1, o2) -> Double.compare(o1.getPrice(),o2.getPrice()))
+                .stream().collect(Collectors.toMap(Product::getCategory,Product::getName));
     }
     
     public static void main(String[] args) {
@@ -90,13 +92,14 @@ public class Order {
         
         
         Order order = new Order(1L,"available",LocalDate.of(2024,12,10),LocalDate.of(2024,12,12),customer1,orderItemList1);
-//        System.out.println(order.getProductHigher(10000,"Food"));
+        System.out.println(order.getProductHigher(10000,"Food"));
 //
-//        order.decreaseAllByCategory("Drink");
-//        System.out.println(order.getItems().get(1).getP());
+        order.decreaseAllByCategory("Drink");
+        System.out.println(order.getItems().get(1).getP());
         
-//        System.out.println(order.getCheapestProduct());
+        System.out.println(order.getCheapestProduct());
         
+        System.out.println(order.getStaticsProduct());
         System.out.println(order.getExpensiveProductByCategory("Food"));
     }
 }

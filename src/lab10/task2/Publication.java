@@ -73,5 +73,5 @@ public abstract class Publication {
     
     public abstract int getMaxChapterPageNum();
     public abstract boolean checkMagazineTitle(String title);
-    public abstract boolean getMagazineAround1year();
+    public abstract boolean getMagazineAroundNyear(int nYear);
 }
