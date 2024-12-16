@@ -43,7 +43,7 @@ public class ReferenceBook extends Publication{
     }
     
     @Override
-    public boolean getMagazineAround1year() {
+    public boolean getMagazineAroundNyear(int nYear) {
         return false;
     }
 }

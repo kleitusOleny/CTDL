@@ -11,6 +11,7 @@ public class OrderManager {
         this.orders = orders;
     }
     
+    //Task1.1 Product maxProduct() tìm ra sản phẩm có giá bán cao nhất.
     public Product maxProduct() {
         Product product = orders.getFirst().getMaxProduct();
         for (int i = 1; i < orders.size(); i++) {
@@ -19,10 +20,12 @@ public class OrderManager {
         return product;
     }
     
-    public Optional<Product> maxProductJava8() {
-        return orders.stream().flatMap(order -> order.getItems().stream().map(OrderItem::getItem)).max((o1, o2) -> Integer.compare(o1.getPrice(), o2.getPrice()));
+    public Product maxProductJava8() {
+        return orders.stream().flatMap(order -> order.getItems().stream().map(OrderItem::getItem)).max((o1, o2) -> Integer.compare(o1.getPrice(), o2.getPrice())).orElse(null);
     }
     
+    //Task1.2 HashMap<String, Integer> productTypesStatistics() trả về loại sản phẩm và
+    //số lượng bán ra cho mỗi loại.
     public HashMap<String, Integer> productTypesStatistics() {
         HashMap<String, Integer> res = new HashMap<>();
         
@@ -40,11 +43,13 @@ public class OrderManager {
                 .collect(Collectors.toMap(o -> o.getItem().getType(), OrderItem::getAmount, Integer::sum));
     }
     
+    //Task1.3 TreeSet<Order> ordersByCost() trả về danh sách các hóa đơn sắp xếp giảm
+    //dần theo giá trị của hóa đơn. Nếu 2 hóa đơn có cùng giá trị thì xếp theo ngày.
     public TreeSet<Order> ordersByCost() {
         Comparator<Order> c = new Comparator<Order>() {
             @Override
             public int compare(Order o1, Order o2) {
-                return (o1.totalPrice() - o2.totalPrice() != 0 ? o1.totalPrice() - o2.totalPrice() : o1.getDate().compareTo(o2.getDate()));
+                return (o1.totalPrice() - o2.totalPrice() != 0 ? o2.totalPrice() - o1.totalPrice() : o1.getDate().compareTo(o2.getDate()));
             }
             
         };
@@ -55,44 +60,8 @@ public class OrderManager {
     }
     
     public Set<Order> ordersByCostJava8() {
-        Set<Order> res = new TreeSet<Order>(((o1, o2) -> (o1.totalPrice() - o2.totalPrice() != 0 ? o1.totalPrice() - o2.totalPrice() : o1.getDate().compareTo(o2.getDate()))));
+        Set<Order> res = new TreeSet<Order>(((o1, o2) -> (o2.totalPrice() - o1.totalPrice() != 0 ? o2.totalPrice() - o1.totalPrice() : o1.getDate().compareTo(o2.getDate()))));
         res.addAll(orders);
         return res;
-    }
-    
-    public static void main(String[] args) {
-        Product p1 = new Product("A", "T", 270000, LocalDate.of(2024, 5, 1));
-        Product p2 = new Product("B", "T", 150000, LocalDate.of(2024, 5, 2));
-        Product p3 = new Product("C", "V", 200000, LocalDate.of(2024, 5, 3));
-        Product p4 = new Product("D", "V", 250000, LocalDate.of(2024, 5, 3));
-        
-        OrderItem orderItem = new OrderItem(p1, 10);
-        OrderItem orderItem1 = new OrderItem(p2, 20);
-        OrderItem orderItem2 = new OrderItem(p3, 5);
-        OrderItem orderItem3 = new OrderItem(p4, 15);
-        
-        
-        List<OrderItem> orderItemList = new ArrayList<>();
-        orderItemList.add(orderItem);
-        orderItemList.add(orderItem1);
-        orderItemList.add(orderItem2);
-        List<OrderItem> orderItemList1 = new ArrayList<>();
-        orderItemList1.add(orderItem3);
-        
-        Order order = new Order("001", "Vinh", "V", LocalDate.of(2024, 5, 1), orderItemList);
-        Order order1 = new Order("002", "T", "V", LocalDate.of(2024, 5, 3), orderItemList1);
-        
-        List<Order> orderList = new ArrayList<>();
-        orderList.add(order);
-        orderList.add(order1);
-        
-        OrderManager orderManager = new OrderManager(orderList);
-        
-        System.out.println(orderManager.maxProductJava8());
-        
-        System.out.println(orderManager.productTypesStatisticsJava8());
-        
-        System.out.println(orderManager.ordersByCostJava8());
-        
     }
 }

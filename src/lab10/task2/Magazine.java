@@ -33,8 +33,8 @@ public class Magazine extends Publication{
     }
     
     @Override
-    public boolean getMagazineAround1year() {
-        return (abs(LocalDate.now().getYear() - this.getYearPublication()) <= 1);
+    public boolean getMagazineAroundNyear(int nYear) {
+        return (abs(LocalDate.now().getYear() - this.getYearPublication()) <= nYear);
     }
     
     
